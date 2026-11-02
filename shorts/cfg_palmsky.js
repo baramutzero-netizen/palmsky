@@ -6,8 +6,10 @@ const CFG = {
   tap: J => J.coverTap(),
   endCard: [['손바닥으로는,', 600, 110, 'accent'], ['하늘을 가릴 수 없다.', 740, 100, 'accent'], ['다들 이미 알고 있었다', 940, 54, 'cream'], ['지금 이장폐천 하러 가기', 1080, 60, 'leaf'], ['baramutzero-netizen.github.io/palmsky', 1180, 40, 'cream', 'Galmuri11']],
   async play(h) {
-    h.cap('성적표가 나왔다', '손바닥이면 충분하겠지');
-    await h.tapFor(2200, 5);
+    // hook: the very first frame already shows palms all over the report card, F peeking through
+    enterT = -1e9; h.J.cover(14, false); h.tap();
+    h.cap('손바닥으로 하늘을 가릴 수 있을까?', '일단 성적표부터', true);
+    await h.tapFor(2200, 6);
     h.cap('"강아지가 먹었어요"', '손가락 사이로 다 보인다');
     { const tp = h.tapFor(1600, 5); await h.buyAll(0, 80); await tp; }
     h.cap('연습생이 됐다', '중2 때 글은 비공개로');

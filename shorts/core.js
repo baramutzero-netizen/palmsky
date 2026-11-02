@@ -54,7 +54,7 @@ async () => {
   const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 12e6, audioBitsPerSecond: 192e3 });
   const chunks = []; rec.ondataavailable = e => e.data.size && chunks.push(e.data); rec.start(500);
   const h = {
-    sleep, cap: (a, b = '') => { caption = [a, b]; capAt = (performance.now() - t0) / 1000; },
+    sleep, cap: (a, b = '', instant = false) => { caption = [a, b]; capAt = instant ? -1 : (performance.now() - t0) / 1000; },
     tap: () => { CFG.tap(J); pressT = (performance.now() - t0) / 1000; },
     async tapFor(ms, ps = 5) { const end = performance.now() + ms; while (performance.now() < end) { h.tap(); await sleep(1000 / ps); } },
     buy: id => { const n = J.NODE[id]; if (!n || J.S().owned[n.id]) return; J.S().cheer += n.cost; J.buy(n); },
